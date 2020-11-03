@@ -5,6 +5,7 @@ The current ciylnx/rtl88x2bu driver doesn't support compilation on a Raspberry P
 
 ```bash
 sudo apt install bc build-essential dkms git raspberrypi-kernel-headers rsync wget
+git clone https://github.com/cilynx/rtl88x2bu.git
 cd rtl88x2bu
 wget https://raw.githubusercontent.com/PieGuy314/RTL88x2BU-RPi4-arm64-Driver-Patch/main/Makefile.patch
 patch Makefile Makefile.patch
@@ -17,3 +18,5 @@ sudo modprobe 88x2bu
 ```
 
 Shutdown, plug in your adaptor and check it's their using 'iw list' and 'ip addr'.
+
+Driver will be automatically recomplied each time a new kernel is installed.
