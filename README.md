@@ -1,14 +1,12 @@
-# RTL88x2BU-ARM64-Driver
-Patch ciylnx/rtl88x2bu driver to compile on Raspberry Pi 4B (arm64)
+# RTL88x2BU RaspberryPi-4B(arm64) Driver Patch
+Patch ciylnx/rtl88x2bu driver to compile and run on RaspberryPi-4B(arm64)
 
-The currentciylnx/rtl88x2bu driver doesn't support compilation on a Raspberry Pi 4 running a 64-bit kernel.
-
-Here's how to fix that...
+The current ciylnx/rtl88x2bu driver doesn't support compilation on a Raspberry Pi 4 running a 64-bit kernel. The workaround here patches the Makefile. Tested in a RPi4B (4GB) running DietPi (Linux DietPi 5.4.72-v8+ #1356 SMP PREEMPT Thu Oct 22 13:58:52 BST 2020 aarch64 GNU/Linux)
 
 ```bash
 sudo apt install bc build-essential dkms git raspberrypi-kernel-headers rsync wget
 cd rtl88x2bu
-wget https://raw.githubusercontent.com/PieGuy314/RTL88x2BU-ARM64-Driver/main/Makefile.patch
+wget https://raw.githubusercontent.com/PieGuy314/RTL88x2BU-RPi4-arm64-Driver-Patch/main/Makefile.patch
 patch Makefile Makefile.patch
 VER=$(sed -n 's/\PACKAGE_VERSION="\(.*\)"/\1/p' dkms.conf)
 sudo rsync -rvhP ./ /usr/src/rtl88x2bu-${VER}
