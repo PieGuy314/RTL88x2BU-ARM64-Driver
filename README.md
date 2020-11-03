@@ -17,6 +17,6 @@ sudo dkms install -m rtl88x2bu -v ${VER}
 sudo modprobe 88x2bu
 ```
 
-Shutdown, plug in your adaptor and check it's there using 'iw list' and 'ip addr'.
+Shutdown, plug in your adaptor, power up and check the adaptor is recognised using 'iw list' and 'ip addr'.
 
 Driver will be automatically recomplied each time a new kernel is installed.
