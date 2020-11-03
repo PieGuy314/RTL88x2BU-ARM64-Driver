@@ -5,13 +5,17 @@ The currentciylnx/rtl88x2bu driver doesn't support compilation on a Raspberry Pi
 
 Here's how to fix that...
 
-<code>
-  sudo apt install bc build-essential dkms git raspberrypi-kernel-headers rsync
-  cd rtl88x2bu
-  VER=$(sed -n 's/\PACKAGE_VERSION="\(.*\)"/\1/p' dkms.conf)
-  sudo rsync -rvhP ./ /usr/src/rtl88x2bu-${VER}
-  sudo dkms add -m rtl88x2bu -v ${VER}
-  sudo dkms build -m rtl88x2bu -v ${VER}
-  sudo dkms install -m rtl88x2bu -v ${VER}
-  sudo modprobe 88x2bu
-</code>
+```bash
+sudo apt install bc build-essential dkms git raspberrypi-kernel-headers rsync wget
+cd rtl88x2bu
+wget https://raw.githubusercontent.com/PieGuy314/RTL88x2BU-ARM64-Driver/main/Makefile.patch
+patch Makefile Makefile.patch
+VER=$(sed -n 's/\PACKAGE_VERSION="\(.*\)"/\1/p' dkms.conf)
+sudo rsync -rvhP ./ /usr/src/rtl88x2bu-${VER}
+sudo dkms add -m rtl88x2bu -v ${VER}
+sudo dkms build -m rtl88x2bu -v ${VER}
+sudo dkms install -m rtl88x2bu -v ${VER}
+sudo modprobe 88x2bu
+```
+
+Shutdown, plug in your adaptor and check it's their using 'iw list' and 'ip addr'.
